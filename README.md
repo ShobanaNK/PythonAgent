@@ -1,2 +1,16 @@
 # PythonAgent
-LLM powered python based web application for appointment scheduling using Langchain and FastAPI. Appointment scheduling will be using FHIR appointment APIs.
+LLM powered python based web application for appointment scheduling using Langchain and FastAPI.
+Appointment scheduling will be using FHIR appointment APIs.
+
+# SetUp
+
+## Bring up FHIR service on local
+Ref - https://medium.com/impelsys/running-and-interacting-with-your-own-hapi-fhir-server-in-local-0f12c0cbbfdd
+
+My server runs at localhost:8086.
+
+## Python Env setup 
+
+python -m venv fhir
+fhir\Scripts\activate
+pip install fastapi uvicorn langchain openai
