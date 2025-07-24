@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from models.query import Query
-from LLMAgent import AgentExecutor
+from LLMAgent import AgentService
 import uvicorn
 import os
 from dotenv import load_dotenv
@@ -24,9 +24,9 @@ async def root_msg():
 @app.post("/chat")
 async def chat(query: Query):
     print("Received chat message " + query.usermessage)
-    agent = AgentExecutor()
-    llm = agent.get_chat_model()
-    prompt = agent.get_prompt(query.usermessage)
+    agentService = AgentService()
+    llm = agentService.get_chat_model()
+    prompt = agentService.get_prompt(query.usermessage)
     response = llm.invoke(prompt)
     return response.content
 

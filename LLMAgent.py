@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-class AgentExecutor:
+class AgentService:
 
     def __init__(self, provider="openai"):
         self.provider = provider
