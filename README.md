@@ -7,6 +7,7 @@ Appointment scheduling will be using FHIR appointment APIs.
 ## Run this Agent
 
 fhir\Scripts\activate
+copy .env file as .env.dev and update the api_key in .env.dev
 python main.py
 
 application starts at http://127.0.0.1:8088

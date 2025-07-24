@@ -1,7 +1,19 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from models.query import Query
+from LLMAgent import AgentExecutor
 import uvicorn
+import os
+from dotenv import load_dotenv
+
+# Option 1: Use an environment variable (recommended)
+env_mode = os.getenv("ENV_MODE", "dev")  # fallback to 'dev' if not set
+
+# Build the filename
+env_file = f".env.{env_mode}"
+
+# Load the appropriate file
+load_dotenv(dotenv_path=env_file)
 
 app = FastAPI()
 
@@ -12,7 +24,11 @@ async def root_msg():
 @app.post("/chat")
 async def chat(query: Query):
     print("Received chat message " + query.usermessage)
-    return "We received your message. Will reach out to you shortly. Thank you!."
+    agent = AgentExecutor()
+    llm = agent.get_chat_model()
+    prompt = agent.get_prompt(query.usermessage)
+    response = llm.invoke(prompt)
+    return response.content
 
 
 @app.get("/favicon.ico", include_in_schema=False)
